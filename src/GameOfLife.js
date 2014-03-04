@@ -11,7 +11,7 @@ myapp.World.prototype.tick = function() {
   }
   
   if(this.liveCellCoordinates.length === 4) {
-	  return this.liveCellCoordinates;
+	  return Array(this.liveCellCoordinates[1], this.liveCellCoordinates[2]);
   }
 
   return [];
