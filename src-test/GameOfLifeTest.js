@@ -97,6 +97,25 @@ GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = funct
 };
 
 /**
+ * @before [*][*][*][*][*]
+ * 		   [ ][ ][ ][ ][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ * 
+ * @after  [ ][*][*][*][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ * 		   [ ][ ][ ][ ][ ]
+ */
+GolTest.prototype.test_fiveLiveCellsInARow_afterTick_middleThreeSurvive = function() {
+	  var world = new myapp.World(liveCellCoordinates=Helper_makeRowOfLiveCells(5));
+	  liveCellCoordinates = world.tick();
+	  assertEquals([[1,0], [2,0], [3,0]], liveCellCoordinates);
+};
+
+/**
  * @before [*][*]
  * 		   [*][*]
  * @after  [*][*]
@@ -127,3 +146,14 @@ GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = funct
 //	  assertEquals([1,0], liveCellCoordinates);
 //};
 
+GolTest.prototype.test_Helper_makeRowOfLiveCells = function() {
+	assertEquals([[0,0], [1,0], [2,0]], Helper_makeRowOfLiveCells(3));
+};
+
+var Helper_makeRowOfLiveCells = function(rowLength) {
+	var row = [];
+	for(var i=0;i<rowLength;i++) {
+		row.push([i,0]);
+	};
+	return row;
+};
