@@ -12,7 +12,7 @@ GolTest = TestCase("GolTest");
  */
 GolTest.prototype.test_afterTick_worldWithOneDeadCell_remainsDead = function() {
   
-  var world = new myapp.World(liveCellCoordinates=[]);
+  var world = new myapp.World(1, liveCellCoordinates=[]);
   liveCellCoordinates = world.tick();
   assertEquals([], liveCellCoordinates);
 };
@@ -22,7 +22,7 @@ GolTest.prototype.test_afterTick_worldWithOneDeadCell_remainsDead = function() {
  * @after  [ ]
  */
 GolTest.prototype.test_afterTick_worldWithOneLiveCell_becomesDead = function() {
-	  var world = new myapp.World(liveCellCoordinates=[[0,0]]);
+	  var world = new myapp.World(1, liveCellCoordinates=[[0,0]]);
 	  liveCellCoordinates = world.tick();
 	  assertEquals([], liveCellCoordinates);
 };
@@ -32,17 +32,35 @@ GolTest.prototype.test_afterTick_worldWithOneLiveCell_becomesDead = function() {
  * @after  [ ][ ]
  */
 GolTest.prototype.test_twoLiveCellsInARow_afterTick_allDie = function() {
-	  var world = new myapp.World(liveCellCoordinates=[[0,0], [1,0]]);
+	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0]]);
 	  liveCellCoordinates = world.tick();
 	  assertEquals([], liveCellCoordinates);
 };
 
 /**
+ * @before [*][ ][ ]
+ * 		   [ ][*][ ]
+ * 		   [ ][ ][*]
+ * @after  [ ][ ][ ]
+ * 		   [ ][*][ ]
+ * 		   [ ][ ][ ]
+ */
+GolTest.prototype.test_threeLiveCellsDiagonal_afterTick_middleSurvives = function() {
+	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [1,1], [2,2]]);
+	  liveCellCoordinates = world.tick();
+	  assertEquals([[1,1]], liveCellCoordinates);
+};
+
+/**
  * @before [*][*][*]
+ * 			-  -  -
+ * 			-  -  -
  * @after  [ ][*][ ]
+ * 			-  -  -
+ * 			-  -  -
  */
 GolTest.prototype.test_threeLiveCellsInARow_afterTick_middleSurvives = function() {
-	  var world = new myapp.World(liveCellCoordinates=[[0,0], [1,0], [2,0]]);
+	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [1,0], [2,0]]);
 	  liveCellCoordinates = world.tick();
 	  assertEquals([[1,0]], liveCellCoordinates);
 };
@@ -57,7 +75,7 @@ GolTest.prototype.test_threeLiveCellsInARow_afterTick_middleSurvives = function(
  * 		   [ ][ ][ ]
  */
 GolTest.prototype.test_threeLiveCellsInAColumn_afterTick_middleSurvives = function() {
-	  var world = new myapp.World(liveCellCoordinates=[[0,0], [0,1], [0,2]]);
+	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [0,1], [0,2]]);
 	  liveCellCoordinates = world.tick();
 	  assertEquals([[0,1]], liveCellCoordinates);
 };
@@ -74,7 +92,7 @@ GolTest.prototype.test_threeLiveCellsInAColumn_afterTick_middleSurvives = functi
  * 		   [ ][ ][ ][ ]
  */
 GolTest.prototype.test_fourLiveCellsInARow_afterTick_middleTwoSurvive = function() {
-	  var world = new myapp.World(liveCellCoordinates=[[0,0], [1,0], [2,0], [3,0]]);
+	  var world = new myapp.World(4, liveCellCoordinates=[[0,0], [1,0], [2,0], [3,0]]);
 	  liveCellCoordinates = world.tick();
 	  assertEquals([[1,0], [2,0]], liveCellCoordinates);
 };
@@ -91,7 +109,7 @@ GolTest.prototype.test_fourLiveCellsInARow_afterTick_middleTwoSurvive = function
  * 		   [ ][ ][ ][ ]
  */
 GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = function() {
-	  var world = new myapp.World(liveCellCoordinates=[[0,0], [0,1], [0,2], [0,3]]);
+	  var world = new myapp.World(4, liveCellCoordinates=[[0,0], [0,1], [0,2], [0,3]]);
 	  liveCellCoordinates = world.tick();
 	  assertEquals([[0,1], [0,2]], liveCellCoordinates);
 };
@@ -110,7 +128,7 @@ GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = funct
  * 		   [ ][ ][ ][ ][ ]
  */
 GolTest.prototype.test_fiveLiveCellsInARow_afterTick_middleThreeSurvive = function() {
-	  var world = new myapp.World(liveCellCoordinates=Helper_makeRowOfLiveCells(5));
+	  var world = new myapp.World(5, liveCellCoordinates=Helper_makeRowOfLiveCells(5));
 	  liveCellCoordinates = world.tick();
 	  assertEquals([[1,0], [2,0], [3,0]], liveCellCoordinates);
 };
@@ -122,7 +140,7 @@ GolTest.prototype.test_fiveLiveCellsInARow_afterTick_middleThreeSurvive = functi
  * 		   [*][*]
  */
 //GolTest.prototype.test_afterTick_allCellsWithThreeLiveNeighboursSurvive = function() {
-//	  var world = new myapp.World(liveCellCoordinates=[[0,0], [1,0], [0,1], [1,1]]);
+//	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0], [0,1], [1,1]]);
 //	  liveCellCoordinates = world.tick();
 //	  assertEquals([[0,0], [1,0], [0,1], [1,1]], liveCellCoordinates);
 //};
