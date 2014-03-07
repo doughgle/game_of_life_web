@@ -1,8 +1,15 @@
 myapp = {};
 
-myapp.World = function(dimension, liveCellCoordinates) {
+/**
+ * World represents a 2 dimensional square matrix of cells.
+ * @param dimension
+ * @param liveCellCoordinates
+ * @returns {myapp.World}
+ */
+
+myapp.World = function(dimension, liveCellCoordinatesArray) {
 	this.dimension = dimension;
-	this.liveCellCoordinates = liveCellCoordinates;
+	this.liveCellCoordinates = liveCellCoordinatesArray;
 };
 
 myapp.World.prototype.tick = function() {
