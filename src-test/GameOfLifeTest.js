@@ -55,16 +55,16 @@ GolTest.prototype.test_threeLiveCellsDiagonal_afterTick_middleSurvives = functio
 
 /**
  * @before [*][*][*]
- * 			-  -  -
- * 			-  -  -
+ * 		   [ ][ ][ ]	
+ * 		   [ ][ ][ ]
  * @after  [ ][*][ ]
- * 			-  -  -
- * 			-  -  -
- */
+ * 		   [ ][*][ ]	
+ * 		   [ ][ ][ ]
+ *  */
 GolTest.prototype.test_threeLiveCellsInARow_afterTick_middleSurvives = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [1,0], [2,0]]);
 	  liveCellCoordinates = world.tick();
-	  assertEquals([[1,0]], liveCellCoordinates);
+	  assertEquals([[1,0], [1,1]], liveCellCoordinates);
 };
 
 /**
@@ -79,7 +79,7 @@ GolTest.prototype.test_threeLiveCellsInARow_afterTick_middleSurvives = function(
 GolTest.prototype.test_threeLiveCellsInAColumn_afterTick_middleSurvives = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [0,1], [0,2]]);
 	  liveCellCoordinates = world.tick();
-	  assertEquals([[0,1]], liveCellCoordinates);
+	  assertEquals([[0,1], [1,1]], liveCellCoordinates);
 };
 
 /**
@@ -96,7 +96,7 @@ GolTest.prototype.test_threeLiveCellsInAColumn_afterTick_middleSurvives = functi
 GolTest.prototype.test_fourLiveCellsInARow_afterTick_middleTwoSurvive = function() {
 	  var world = new myapp.World(4, liveCellCoordinates=[[0,0], [1,0], [2,0], [3,0]]);
 	  liveCellCoordinates = world.tick();
-	  assertEquals([[1,0], [2,0]], liveCellCoordinates);
+	  assertEquals([[1,0],[2,0],[1,1],[2,1]], liveCellCoordinates);
 };
 
 /**
@@ -113,7 +113,7 @@ GolTest.prototype.test_fourLiveCellsInARow_afterTick_middleTwoSurvive = function
 GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = function() {
 	  var world = new myapp.World(4, liveCellCoordinates=[[0,0], [0,1], [0,2], [0,3]]);
 	  liveCellCoordinates = world.tick();
-	  assertEquals([[0,1], [0,2]], liveCellCoordinates);
+	  assertEquals([[0,1],[1,1],[0,2],[1,2]], liveCellCoordinates);
 };
 
 /**
@@ -132,7 +132,7 @@ GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = funct
 GolTest.prototype.test_fiveLiveCellsInARow_afterTick_middleThreeSurvive = function() {
 	  var world = new myapp.World(5, liveCellCoordinates=Helper_makeRowOfLiveCells(5));
 	  liveCellCoordinates = world.tick();
-	  assertEquals([[1,0], [2,0], [3,0]], liveCellCoordinates);
+	  assertEquals([[1,0],[2,0],[3,0],[1,1],[2,1],[3,1]], liveCellCoordinates);
 };
 
 /**
@@ -150,14 +150,14 @@ GolTest.prototype.test_twoByTwoBlockOfLiveCells_afterTick_allSurvive = function(
 /**
  * @before [*][*]
  * 		   [*][ ]
- * @after  [*][ ]
- * 		   [ ][*]
+ * @after  [*][*]
+ * 		   [*][*]
  */
-//GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoDiagonal = function() {
-//	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0], [0,1]]);
-//	  liveCellCoordinates = world.tick();
-//	  assertEquals([[0,0], [1,1]], liveCellCoordinates);
-//};
+GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoByTwoBlock = function() {
+	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0], [0,1]]);
+	  liveCellCoordinates = world.tick();
+	  assertEquals([[0,0], [1,0], [0,1], [1,1]], liveCellCoordinates);
+};
 
 //GolTest.prototype.test_afterTick_anotherliveCellWithTwoLiveNeighbours_survives = function() {
 //	  var world = new myapp.World(liveCellCoordinates=[[0,0], [1,0], [1,1]]);

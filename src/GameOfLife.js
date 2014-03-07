@@ -56,8 +56,12 @@ myapp.World.prototype.tick = function() {
 					nextGenerationOfLiveCells.push([x,y]);
 				}				
 			}
-			//  else
-			//    not in next generation of live cells i.e. dead
+			else {
+				// already dead
+				if(liveNeighbours === 3) {
+					nextGenerationOfLiveCells.push([x,y]);
+				}
+			}
 		}
 	}
 	
