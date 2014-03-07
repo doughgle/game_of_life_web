@@ -51,14 +51,12 @@ myapp.World.prototype.tick = function() {
 
 			var liveNeighbours = countLiveNeighbours(x, y);
 			if(isCellAlive(x, y)) {
-				if(liveNeighbours === 2 || liveNeighbours === 3) {
-					//    survives
+				if(isSurvivor(liveNeighbours)) {
 					nextGenerationOfLiveCells.push([x,y]);
 				}				
 			}
 			else {
-				// already dead
-				if(liveNeighbours === 3) {
+				if(isBorn(liveNeighbours)) {
 					nextGenerationOfLiveCells.push([x,y]);
 				}
 			}
@@ -67,3 +65,11 @@ myapp.World.prototype.tick = function() {
 	
 	return nextGenerationOfLiveCells;
 };
+
+function isBorn(liveNeighbours) {
+	return liveNeighbours === 3;
+}
+
+function isSurvivor(liveNeighbours) {
+	return liveNeighbours === 2 || liveNeighbours === 3;
+}
