@@ -140,8 +140,20 @@ GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoByTwoBlock = functi
 	  assertEquals([[0,0], [1,0], [0,1], [1,1]], liveCellCoordinates);
 };
 
-//GolTest.prototype.test_afterTick_anotherliveCellWithTwoLiveNeighbours_survives = function() {
-//	  var world = new myapp.World(liveCellCoordinates=[[0,0], [1,0], [1,1]]);
-//	  liveCellCoordinates = world.tick();
-//	  assertEquals([1,0], liveCellCoordinates);
-//};
+/**
+ * @brief  Tests a 2 tick oscillating pattern called a Blinker.
+ * @before [ ][*][ ]
+ * 		   [ ][*][ ]
+ * 		   [ ][*][ ]
+ * 
+ * @after  [ ][*][ ]
+ * 		   [ ][*][ ]
+ * 		   [ ][*][ ]
+ */
+GolTest.prototype.test_threeCellsCentralColumn_afterTwoTicks_returnsToBeginning = function() {
+	  var world = new myapp.World(3, liveCellCoordinates=[[1,0], [1,1], [1,2]]);
+	  liveCellCoordinates = world.tick();
+	  assertEquals([[0,1], [1,1], [2,1]], liveCellCoordinates);
+	  liveCellCoordinates = world.tick();
+	  assertEquals([[1,0], [1,1], [1,2]], liveCellCoordinates);
+};
