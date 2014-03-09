@@ -10,32 +10,6 @@ myapp = {};
 myapp.World = function(dimension, liveCellCoordinatesArray) {
 	this.dimension = dimension;
 	this.liveCellCoordinates = liveCellCoordinatesArray;
-	
-	function countLiveNeighbours(x, y) {
-		var liveNeighbours = 0;
-		
-		if(isCellAlive(x-1, y-1)) liveNeighbours++;
-		if(isCellAlive(x,   y-1)) liveNeighbours++;
-		if(isCellAlive(x+1, y-1)) liveNeighbours++;
-		if(isCellAlive(x-1, y)) liveNeighbours++;
-		if(isCellAlive(x+1, y)) liveNeighbours++;
-		if(isCellAlive(x-1, y+1)) liveNeighbours++;
-		if(isCellAlive(x,   y+1)) liveNeighbours++;
-		if(isCellAlive(x+1, y+1)) liveNeighbours++;
-		
-//		jstestdriver.console.log(">>> liveNeighbours of ", x, y, ": ", liveNeighbours);
-		return liveNeighbours;
-	};
-
-	function isCellAlive(x, y) {
-		for(var cell in this.liveCellCoordinates) {		
-			if(x === this.liveCellCoordinates[cell][0] && y === this.liveCellCoordinates[cell][1]) {
-				return true;
-			}
-		}
-		return false;
-	};
-
 };
 
 /**
@@ -49,7 +23,7 @@ myapp.World.prototype.tick = function() {
 	for(var y=0; y<this.dimension; y++) {
 		for(var x=0; x<this.dimension; x++) {
 
-			var liveNeighbours = countLiveNeighbours(x, y);
+			var liveNeighbours = getLiveNeighbourCount(x, y);
 			if(isCellAlive(x, y)) {
 				if(isSurvivor(liveNeighbours)) {
 					nextGenerationOfLiveCells.push([x,y]);
@@ -64,6 +38,31 @@ myapp.World.prototype.tick = function() {
 	}
 	
 	return nextGenerationOfLiveCells;
+};
+
+function getLiveNeighbourCount(x, y) {
+	var liveNeighbours = 0;
+	
+	if(isCellAlive(x-1, y-1)) liveNeighbours++;
+	if(isCellAlive(x,   y-1)) liveNeighbours++;
+	if(isCellAlive(x+1, y-1)) liveNeighbours++;
+	if(isCellAlive(x-1, y)) liveNeighbours++;
+	if(isCellAlive(x+1, y)) liveNeighbours++;
+	if(isCellAlive(x-1, y+1)) liveNeighbours++;
+	if(isCellAlive(x,   y+1)) liveNeighbours++;
+	if(isCellAlive(x+1, y+1)) liveNeighbours++;
+	
+//	jstestdriver.console.log(">>> liveNeighbours of ", x, y, ": ", liveNeighbours);
+	return liveNeighbours;
+};
+
+function isCellAlive(x, y) {
+	for(var cell in this.liveCellCoordinates) {		
+		if(x === this.liveCellCoordinates[cell][0] && y === this.liveCellCoordinates[cell][1]) {
+			return true;
+		}
+	}
+	return false;
 };
 
 function isBorn(liveNeighbours) {
