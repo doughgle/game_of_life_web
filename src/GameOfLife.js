@@ -23,8 +23,8 @@ myapp.World.prototype.tick = function() {
 	for(var y=0; y<this.dimension; y++) {
 		for(var x=0; x<this.dimension; x++) {
 
-			var liveNeighbours = getLiveNeighbourCount(x, y);
-			if(isCellAlive(x, y)) {
+			var liveNeighbours = this.getLiveNeighbourCount(x, y);
+			if(this.isCellAlive(x, y)) {
 				if(isSurvivor(liveNeighbours)) {
 					nextGenerationOfLiveCells.push([x,y]);
 				}				
@@ -37,26 +37,28 @@ myapp.World.prototype.tick = function() {
 		}
 	}
 	
+	this.liveCellCoordinates = nextGenerationOfLiveCells;
+	
 	return nextGenerationOfLiveCells;
 };
 
-function getLiveNeighbourCount(x, y) {
+myapp.World.prototype.getLiveNeighbourCount = function(x, y) {
 	var liveNeighbours = 0;
 	
-	if(isCellAlive(x-1, y-1)) liveNeighbours++;
-	if(isCellAlive(x,   y-1)) liveNeighbours++;
-	if(isCellAlive(x+1, y-1)) liveNeighbours++;
-	if(isCellAlive(x-1, y)) liveNeighbours++;
-	if(isCellAlive(x+1, y)) liveNeighbours++;
-	if(isCellAlive(x-1, y+1)) liveNeighbours++;
-	if(isCellAlive(x,   y+1)) liveNeighbours++;
-	if(isCellAlive(x+1, y+1)) liveNeighbours++;
+	if(this.isCellAlive(x-1, y-1)) liveNeighbours++;
+	if(this.isCellAlive(x,   y-1)) liveNeighbours++;
+	if(this.isCellAlive(x+1, y-1)) liveNeighbours++;
+	if(this.isCellAlive(x-1, y)) liveNeighbours++;
+	if(this.isCellAlive(x+1, y)) liveNeighbours++;
+	if(this.isCellAlive(x-1, y+1)) liveNeighbours++;
+	if(this.isCellAlive(x,   y+1)) liveNeighbours++;
+	if(this.isCellAlive(x+1, y+1)) liveNeighbours++;
 	
 //	jstestdriver.console.log(">>> liveNeighbours of ", x, y, ": ", liveNeighbours);
 	return liveNeighbours;
 };
 
-function isCellAlive(x, y) {
+myapp.World.prototype.isCellAlive = function(x, y) {
 	for(var cell in this.liveCellCoordinates) {		
 		if(x === this.liveCellCoordinates[cell][0] && y === this.liveCellCoordinates[cell][1]) {
 			return true;
