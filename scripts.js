@@ -6,6 +6,12 @@ $(document).ready(function(){
 	var seed = generateRandomLiveCellsSeed(dimension, chanceOfAlive=0.5);	
 	cells = $grid.find('td');
 	drawSeed(seed);
+	
+	var world = new app.Game(dimension, seed);
+	$('#step').click(function() {
+		drawSeed(world.step());
+	});
+	
 });
 
 function drawGrid(dimension) {
@@ -21,8 +27,17 @@ function drawGrid(dimension) {
 	$grid.append($(trHtmlString));
 }
 
+function clearGrid() {
+	for(var y=0; y<dimension; y++) {
+		for(var x=0; x<dimension; x++) {
+			var $drawableCell = getCell(x, y);
+			$drawableCell.removeClass('alive');
+		}
+	}
+}
+
 function drawSeed(seed) {
-//	console.log("seed ", seed);
+	clearGrid();	
 	for(var cellRef in seed) {
 		console.log("live cell" + seed[cellRef]);
 		var $drawableCell = getCell(seed[cellRef][0], seed[cellRef][1]);
