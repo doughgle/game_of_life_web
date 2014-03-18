@@ -7,10 +7,6 @@ $(document).ready(function(){
 	
 	world = new app.Game(dimension, seed);
 	
-	$('#step').click(function() {
-		drawLiveCells(world.step());
-	});
-	
 	$('#play').click(function() {
 		play();
 	});
@@ -18,7 +14,10 @@ $(document).ready(function(){
 	$('#pause').click(function() {
 		pause();
 	});
-	
+
+	$('#step').click(function() {
+		drawLiveCells(world.step());
+	});
 });
 
 function play() {
