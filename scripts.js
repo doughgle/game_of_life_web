@@ -15,11 +15,19 @@ $(document).ready(function(){
 		play();
 	});
 	
+	$('#pause').click(function() {
+		pause();
+	});
+	
 });
 
 function play() {
 	drawLiveCells(world.step());
-	setTimeout('play()', 200);
+	timer = setTimeout('play()', 200);
+}
+
+function pause() {
+	clearTimeout(timer);
 }
 
 function drawGrid(dimension) {
