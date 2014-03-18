@@ -1,17 +1,26 @@
-var dimension = 15;
+var dimension = 12;
 
 $(document).ready(function(){
 	drawGrid(dimension);
 	var seed = generateRandomLiveCellsSeed(dimension, chanceOfAlive=0.5);	
 	drawLiveCells(seed);
 	
-	var world = new app.Game(dimension, seed);
+	world = new app.Game(dimension, seed);
 	
 	$('#step').click(function() {
 		drawLiveCells(world.step());
 	});
 	
+	$('#play').click(function() {
+		play();
+	});
+	
 });
+
+function play() {
+	drawLiveCells(world.step());
+	setTimeout('play()', 200);
+}
 
 function drawGrid(dimension) {
 	$grid = $('#grid');
