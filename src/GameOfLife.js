@@ -45,7 +45,10 @@ myapp.World.prototype.tick = function() {
 };
 
 myapp.World.prototype.stepBack = function() {
-	return this.liveCellHistory.pop();
+	if(this.liveCellHistory.length > 0) {
+		return this.liveCellHistory.pop();		
+	}
+	else return this.liveCellCoordinates;
 };
 
 myapp.World.prototype.getLiveNeighbourCount = function(x, y) {

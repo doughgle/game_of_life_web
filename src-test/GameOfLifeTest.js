@@ -153,6 +153,12 @@ GolTest.prototype.test_Blinker = function() {
 	  assertEquals([[1,0], [1,1], [1,2]], liveCells);
 };
 
+GolTest.prototype.test_stepBackOnSeed_shouldReturnSeed = function() {
+	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
+	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
+	assertEquals(blinkerVerticalLine, world.stepBack());
+};
+
 GolTest.prototype.test_stepBackwardsOnce_blinker = function() {
 	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
 	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
