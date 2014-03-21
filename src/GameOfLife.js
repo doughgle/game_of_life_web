@@ -10,6 +10,7 @@ myapp = {};
 myapp.World = function(dimension, liveCellCoordinatesArray) {
 	this.dimension = dimension;
 	this.liveCellCoordinates = liveCellCoordinatesArray;
+	this.liveCellHistory = [];
 };
 
 /**
@@ -36,10 +37,15 @@ myapp.World.prototype.tick = function() {
 			}
 		}
 	}
-	
+
+	this.liveCellHistory.push(this.liveCellCoordinates);
 	this.liveCellCoordinates = nextGenerationOfLiveCells;
 	
 	return nextGenerationOfLiveCells;
+};
+
+myapp.World.prototype.stepBack = function() {
+	return this.liveCellHistory.pop();
 };
 
 myapp.World.prototype.getLiveNeighbourCount = function(x, y) {

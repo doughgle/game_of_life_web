@@ -152,3 +152,17 @@ GolTest.prototype.test_Blinker = function() {
 	  jstestdriver.console.log("2nd tick", liveCells);
 	  assertEquals([[1,0], [1,1], [1,2]], liveCells);
 };
+
+GolTest.prototype.test_stepBackwardsOnce_blinker = function() {
+	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
+	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
+	world.tick();
+	assertEquals(blinkerVerticalLine, world.stepBack());
+};
+
+GolTest.prototype.test_stepBackwardsFromBlock_ToThreeCelledRshape = function() {
+	var threeCelledRshape = [[0,0], [1,0], [0,1]];
+	var world = new myapp.World(dimension=2, liveCellsSeed=threeCelledRshape);
+	world.tick();
+	assertEquals(threeCelledRshape, world.stepBack());
+};
