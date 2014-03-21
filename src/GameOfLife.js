@@ -15,9 +15,9 @@ myapp.World = function(dimension, liveCellCoordinatesArray) {
 
 /**
  * 
- * @returns {Array} of live cells after tick.
+ * @returns {Array} of live cells after step.
  */
-myapp.World.prototype.tick = function() {
+myapp.World.prototype.step = function() {
 	var nextGenerationOfLiveCells = [];
 	
 	// for each cell in world

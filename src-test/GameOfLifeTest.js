@@ -13,7 +13,7 @@ GolTest = TestCase("GolTest");
 GolTest.prototype.test_worldWithOneDeadCell_afterTick_remainsDead = function() {
   
   var world = new myapp.World(1, liveCellCoordinates=[]);
-  assertEquals([], world.tick());
+  assertEquals([], world.step());
 };
 
 /**
@@ -22,7 +22,7 @@ GolTest.prototype.test_worldWithOneDeadCell_afterTick_remainsDead = function() {
  */
 GolTest.prototype.test_worldWithOneLiveCell_afterTick_becomesDead = function() {
 	  var world = new myapp.World(1, liveCellCoordinates=[[0,0]]);
-	  assertEquals([], world.tick());
+	  assertEquals([], world.step());
 };
 
 /**
@@ -33,7 +33,7 @@ GolTest.prototype.test_worldWithOneLiveCell_afterTick_becomesDead = function() {
  */
 GolTest.prototype.test_twoLiveCellsInARow_afterTick_allDie = function() {
 	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0]]);
-	  assertEquals([], world.tick());
+	  assertEquals([], world.step());
 };
 
 /**
@@ -46,7 +46,7 @@ GolTest.prototype.test_twoLiveCellsInARow_afterTick_allDie = function() {
  */
 GolTest.prototype.test_threeLiveCellsDiagonal_afterTick_middleSurvives = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [1,1], [2,2]]);
-	  assertEquals([[1,1]], world.tick());
+	  assertEquals([[1,1]], world.step());
 };
 
 /**
@@ -59,7 +59,7 @@ GolTest.prototype.test_threeLiveCellsDiagonal_afterTick_middleSurvives = functio
  *  */
 GolTest.prototype.test_threeLiveCellsInARow_afterTick_middleSurvives = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [1,0], [2,0]]);
-	  assertEquals([[1,0], [1,1]], world.tick());
+	  assertEquals([[1,0], [1,1]], world.step());
 };
 
 /**
@@ -73,7 +73,7 @@ GolTest.prototype.test_threeLiveCellsInARow_afterTick_middleSurvives = function(
  */
 GolTest.prototype.test_threeLiveCellsInAColumn_afterTick_middleSurvives = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[0,0], [0,1], [0,2]]);
-	  liveCellCoordinates = world.tick();
+	  liveCellCoordinates = world.step();
 	  assertEquals([[0,1], [1,1]], liveCellCoordinates);
 };
 
@@ -90,7 +90,7 @@ GolTest.prototype.test_threeLiveCellsInAColumn_afterTick_middleSurvives = functi
  */
 GolTest.prototype.test_fourLiveCellsInARow_afterTick_middleTwoSurvive = function() {
 	  var world = new myapp.World(4, liveCellCoordinates=[[0,0], [1,0], [2,0], [3,0]]);
-	  liveCellCoordinates = world.tick();
+	  liveCellCoordinates = world.step();
 	  assertEquals([[1,0],[2,0],[1,1],[2,1]], liveCellCoordinates);
 };
 
@@ -107,7 +107,7 @@ GolTest.prototype.test_fourLiveCellsInARow_afterTick_middleTwoSurvive = function
  */
 GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = function() {
 	  var world = new myapp.World(4, liveCellCoordinates=[[0,0], [0,1], [0,2], [0,3]]);
-	  liveCellCoordinates = world.tick();
+	  liveCellCoordinates = world.step();
 	  assertEquals([[0,1],[1,1],[0,2],[1,2]], liveCellCoordinates);
 };
 
@@ -119,7 +119,7 @@ GolTest.prototype.test_fourLiveCellsInAColumn_afterTick_middleTwoSurvive = funct
  */
 GolTest.prototype.test_twoByTwoBlockOfLiveCells_afterTick_allSurvive = function() {
 	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0], [0,1], [1,1]]);
-	  assertEquals([[0,0], [1,0], [0,1], [1,1]], world.tick());
+	  assertEquals([[0,0], [1,0], [0,1], [1,1]], world.step());
 };
 
 /**
@@ -130,11 +130,11 @@ GolTest.prototype.test_twoByTwoBlockOfLiveCells_afterTick_allSurvive = function(
  */
 GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoByTwoBlock = function() {
 	  var world = new myapp.World(2, liveCellCoordinates=[[0,0], [1,0], [0,1]]);
-	  assertEquals([[0,0], [1,0], [0,1], [1,1]], world.tick());
+	  assertEquals([[0,0], [1,0], [0,1], [1,1]], world.step());
 };
 
 /**
- * @brief  Tests a 2 tick oscillating pattern called a Blinker.
+ * @brief  Tests a 2 step oscillating pattern called a Blinker.
  * @before [ ][*][ ]
  * 		   [ ][*][ ]
  * 		   [ ][*][ ]
@@ -145,11 +145,11 @@ GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoByTwoBlock = functi
  */
 GolTest.prototype.test_Blinker = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[1,0], [1,1], [1,2]]);
-	  var liveCells = world.tick();
-	  jstestdriver.console.log("1st tick", liveCells);
+	  var liveCells = world.step();
+	  jstestdriver.console.log("1st step", liveCells);
 	  assertEquals([[0,1], [1,1], [2,1]], liveCells);
-	  var liveCells = world.tick();
-	  jstestdriver.console.log("2nd tick", liveCells);
+	  var liveCells = world.step();
+	  jstestdriver.console.log("2nd step", liveCells);
 	  assertEquals([[1,0], [1,1], [1,2]], liveCells);
 };
 
@@ -162,13 +162,13 @@ GolTest.prototype.test_stepBackOnSeed_shouldReturnSeed = function() {
 GolTest.prototype.test_stepBackwardsOnce_blinker = function() {
 	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
 	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
-	world.tick();
+	world.step();
 	assertEquals(blinkerVerticalLine, world.stepBack());
 };
 
 GolTest.prototype.test_stepBackwardsFromBlock_ToThreeCelledRshape = function() {
 	var threeCelledRshape = [[0,0], [1,0], [0,1]];
 	var world = new myapp.World(dimension=2, liveCellsSeed=threeCelledRshape);
-	world.tick();
+	world.step();
 	assertEquals(threeCelledRshape, world.stepBack());
 };

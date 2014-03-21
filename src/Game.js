@@ -11,7 +11,11 @@ app.Game = function(squareWorldDimension, liveCellsSeed) {
 };
 
 app.Game.prototype.step = function() {
-	return this.world.tick();
+	return this.world.step();
+};
+
+app.Game.prototype.stepBack = function() {
+	return [[0,0], [1,0], [0,1]];
 };
 
 function generateRandomLiveCellsSeed(dimension, chanceOfAlive) {
