@@ -15,7 +15,7 @@ app.Game.prototype.step = function() {
 };
 
 app.Game.prototype.stepBack = function() {
-	return [[0,0], [1,0], [0,1]];
+	return this.world.stepBack();
 };
 
 function generateRandomLiveCellsSeed(dimension, chanceOfAlive) {

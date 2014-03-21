@@ -63,7 +63,6 @@ myapp.World.prototype.getLiveNeighbourCount = function(x, y) {
 	if(this.isCellAlive(x,   y+1)) liveNeighbours++;
 	if(this.isCellAlive(x+1, y+1)) liveNeighbours++;
 	
-//	jstestdriver.console.log(">>> liveNeighbours of ", x, y, ": ", liveNeighbours);
 	return liveNeighbours;
 };
 

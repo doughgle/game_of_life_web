@@ -6,7 +6,11 @@ $(document).ready(function(){
 	drawLiveCells(seed);
 	
 	world = new app.Game(dimension, seed);
-	
+
+	$('#stepback').click(function() {
+		drawLiveCells(world.stepBack());
+	});
+
 	$('#play').click(function() {
 		play();
 	});

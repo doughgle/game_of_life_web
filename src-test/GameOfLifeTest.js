@@ -146,10 +146,8 @@ GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoByTwoBlock = functi
 GolTest.prototype.test_Blinker = function() {
 	  var world = new myapp.World(3, liveCellCoordinates=[[1,0], [1,1], [1,2]]);
 	  var liveCells = world.step();
-	  jstestdriver.console.log("1st step", liveCells);
 	  assertEquals([[0,1], [1,1], [2,1]], liveCells);
 	  var liveCells = world.step();
-	  jstestdriver.console.log("2nd step", liveCells);
 	  assertEquals([[1,0], [1,1], [1,2]], liveCells);
 };
 
