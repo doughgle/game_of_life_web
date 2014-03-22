@@ -46,9 +46,9 @@ myapp.World.prototype.step = function() {
 
 myapp.World.prototype.stepBack = function() {
 	if(this.liveCellHistory.length > 0) {
-		return this.liveCellHistory.pop();		
+		this.liveCellCoordinates = this.liveCellHistory.pop();
 	}
-	else return this.liveCellCoordinates;
+	return this.liveCellCoordinates;
 };
 
 myapp.World.prototype.getLiveNeighbourCount = function(x, y) {

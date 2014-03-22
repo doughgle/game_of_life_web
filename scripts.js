@@ -8,6 +8,7 @@ $(document).ready(function(){
 	world = new app.Game(dimension, seed);
 
 	$('#stepback').click(function() {
+		pause();
 		drawLiveCells(world.stepBack());
 	});
 
@@ -20,6 +21,7 @@ $(document).ready(function(){
 	});
 
 	$('#step').click(function() {
+		pause();
 		drawLiveCells(world.step());
 	});
 });
@@ -30,7 +32,9 @@ function play() {
 }
 
 function pause() {
-	clearTimeout(timer);
+	if(typeof timer != "undefined") {
+		clearTimeout(timer);
+	}
 }
 
 function drawGrid(dimension) {
@@ -58,7 +62,6 @@ function clearGrid() {
 function drawLiveCells(liveCells) {
 	clearGrid();	
 	for(var cellRef in liveCells) {
-		console.log("live cell" + liveCells[cellRef]);
 		var $drawableCell = getCell(liveCells[cellRef][0], liveCells[cellRef][1]);
 		$drawableCell.addClass('alive');
 	}

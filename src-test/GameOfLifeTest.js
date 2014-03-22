@@ -144,23 +144,17 @@ GolTest.prototype.test_threeCelledRshape_afterTick_becomesTwoByTwoBlock = functi
  * 		   [ ][*][ ]
  */
 GolTest.prototype.test_Blinker = function() {
-	  var world = new myapp.World(3, liveCellCoordinates=[[1,0], [1,1], [1,2]]);
-	  var liveCells = world.step();
-	  assertEquals([[0,1], [1,1], [2,1]], liveCells);
-	  var liveCells = world.step();
-	  assertEquals([[1,0], [1,1], [1,2]], liveCells);
+	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
+	var world = new myapp.World(3, liveCellCoordinates=blinkerVerticalLine);
+	var liveCells = world.step();
+	assertEquals([[0,1], [1,1], [2,1]], liveCells);
+	var liveCells = world.step();
+	assertEquals(blinkerVerticalLine, liveCells);
 };
 
-GolTest.prototype.test_stepBackOnSeed_shouldReturnSeed = function() {
+GolTest.prototype.test_stepBackFromSeed_shouldReturnSeed = function() {
 	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
 	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
-	assertEquals(blinkerVerticalLine, world.stepBack());
-};
-
-GolTest.prototype.test_stepBackwardsOnce_blinker = function() {
-	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
-	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
-	world.step();
 	assertEquals(blinkerVerticalLine, world.stepBack());
 };
 
@@ -169,4 +163,12 @@ GolTest.prototype.test_stepBackwardsFromBlock_ToThreeCelledRshape = function() {
 	var world = new myapp.World(dimension=2, liveCellsSeed=threeCelledRshape);
 	world.step();
 	assertEquals(threeCelledRshape, world.stepBack());
+};
+
+GolTest.prototype.test_verticalBlinker_twoStepsForward_oneStepBack = function() {
+	var blinkerVerticalLine = [[1,0], [1,1], [1,2]];
+	var world = new myapp.World(dimension=3, liveCellsCoordinates=blinkerVerticalLine);
+	world.step();
+	world.step();
+	assertEquals([[0,1], [1,1], [2,1]], world.stepBack());
 };
