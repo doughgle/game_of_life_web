@@ -11,7 +11,7 @@ $(document).ready(function(){
 		pause();
 		drawLiveCells(world.stepBack());
 	});
-
+	
 	$('#play').click(function() {
 		play();
 	});
