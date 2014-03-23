@@ -1,9 +1,19 @@
 <html>
 <head>
+	<title>Conway's Game of Life</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>
 	<script type="text/javascript" src="src/Game.js"></script>
 	<script type="text/javascript" src="src/GameOfLife.js"></script>
+	
+	<script type="text/javascript" src="vendor/Tangle.js"></script>
+	<!-- TangleKit (optional) -->
+	<link rel="stylesheet" href="vendor/TangleKit/TangleKit.css" type="text/css">
+	<script type="text/javascript" src="vendor/TangleKit/mootools.js"></script>
+	<script type="text/javascript" src="vendor/TangleKit/sprintf.js"></script>
+	<script type="text/javascript" src="vendor/TangleKit/BVTouchable.js"></script>
+	<script type="text/javascript" src="vendor/TangleKit/TangleKit.js"></script>
+	
 	<style>
 		td {
 			border: solid 1px;
@@ -15,6 +25,10 @@
 <body>
 	<h1>Conway's Game of Life</h1>
 	<p>"...from the simple rules, one wouldn't expect to find things that move in a purposeful manner and surprise us." - John Conway</p>
+	<p id="dimensionSetter">
+		Consider a world of <b class="TKAdjustableNumber" data-var="dimensionConf"> x <span data-var="yDimension"></span></b> 
+		with a random seed of live cells.
+	</p>
 	<table id="grid"></table>
 	<button id='stepback'>Step Back</button>
 	<button id='play'>Play</button>
